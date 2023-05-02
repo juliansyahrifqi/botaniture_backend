@@ -2,7 +2,7 @@ import "reflect-metadata";
 import express from "express";
 import { myDataSource } from "./app-data-source";
 
-import user from "./routes/user";
+import routes from "./routes/index";
 
 myDataSource
   .initialize()
@@ -18,7 +18,8 @@ const app = express();
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 
-app.use("/api/v1", user)
+app.use("/api/v1", routes.servicesRoute);
+app.use("/api/v1", routes.userRoute);
 
 app.listen(3005, () => {
   console.log("Server running at port 3005")
