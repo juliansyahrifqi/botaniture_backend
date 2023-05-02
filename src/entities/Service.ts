@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, IsNull, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Service {
@@ -10,4 +10,7 @@ export class Service {
 
   @Column()
   service_desc: string;
+
+  @Column({ nullable: true})
+  service_icon: string;
 }
