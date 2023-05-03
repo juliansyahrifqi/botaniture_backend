@@ -2,7 +2,7 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 
-const uploadFile = (dirName: string) => {
+const uploadSingleFile = (dirName: string, fieldName: string) => {
   const uploadDirectory = path.join(__dirname, '../../', 'uploads/', dirName);
 
   if (!fs.existsSync(uploadDirectory)) {
@@ -19,7 +19,20 @@ const uploadFile = (dirName: string) => {
     },
   });
 
-  return storage;
+  const upload = multer({
+    storage: storage,
+    limits: { fileSize: 1024 * 1024 * 2},
+    fileFilter(req, file, cb) {
+      if (!file.originalname.match(/\.(jpg|jpeg|png|gif|svg)$/)) {
+        return cb(null, false);
+      }
+
+      return cb(null, true);
+    }
+  }).single(fieldName);
+
+  return upload;
 };
 
-export default uploadFile;
+
+export default uploadSingleFile;

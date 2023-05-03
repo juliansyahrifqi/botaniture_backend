@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { LayananService } from "../services/Service";
 import { CreateServiceDTO, UpdateServiceDTO } from "../dto/service.dto";
-import uploadFile from "../utils/uploadFile";
 import multer from "multer";
 import { existsSync, unlink } from "fs";
+import uploadSingleFile from "../utils/uploadFile";
 
 export class ServiceController {
   private layananSerive: LayananService;
@@ -22,18 +22,7 @@ export class ServiceController {
   }
 
   public async createService(req: Request, res: Response) {
-    const store = uploadFile("service");
-    const upload = multer({ 
-      storage: store, 
-      limits: { fileSize: 1024 * 1024 * 2},
-      fileFilter(req, file, cb) {
-        if (!file.originalname.match(/\.(jpg|jpeg|png|gif|svg)$/)) {
-          return cb(null, false);
-        } 
-
-        return cb(null, true)
-      },
-    }).single("service_icon");
+    const upload = uploadSingleFile("service", "service_icon");
 
     upload(req, res, async(err) => {
       if (err) {
@@ -56,18 +45,7 @@ export class ServiceController {
   }
 
   public async updateService(req: Request, res: Response) {
-    const store = uploadFile("service");
-    const upload = multer({ 
-      storage: store, 
-      limits: { fileSize: 1024 * 1024 * 2},
-      fileFilter(req, file, cb) {
-        if (!file.originalname.match(/\.(jpg|jpeg|png|gif|svg)$/)) {
-          return cb(null, false);
-        } 
-
-        return cb(null, true)
-      },
-    }).single("service_icon");
+    const upload = uploadSingleFile("service", "service_icon");
 
     upload(req, res, async(err) => {
       if (err) {
