@@ -45,7 +45,7 @@ export class ContactController {
   }
 
   public async updateContact(req: Request, res: Response) {
-    const upload = uploadSingleFile("service", "service_icon");
+    const upload = uploadSingleFile("contact", "contact_image");
 
     upload(req, res, async(err) => {
       if (err) {
@@ -62,8 +62,8 @@ export class ContactController {
         let finalImage: string;
 
         if(req.file) {
-          if (existsSync('uploads/service/' + oldImage)) {
-            unlink('uploads/service/' + oldImage, (err) => {
+          if (existsSync('uploads/contact/' + oldImage)) {
+            unlink('uploads/contact/' + oldImage, (err) => {
               if (err) throw err;
             });
           }
@@ -92,11 +92,11 @@ export class ContactController {
       const contact = await this.contactService.getContactById(+req.params.id);
 
       if(contact.statusCode === 404) {
-        return { statusCode: 404, message: 'Service not found'};
+        return { statusCode: 404, message: 'Contact not found'};
       } 
 
-      if (existsSync('uploads/service/' + contact.data.contact_image)) {
-        unlink('uploads/service/' + contact.data.contact_image, (err) => {
+      if (existsSync('uploads/contact/' + contact.data.contact_image)) {
+        unlink('uploads/contact/' + contact.data.contact_image, (err) => {
           if (err) throw err;
         });
       }

@@ -48,14 +48,14 @@ export class ContactService {
       const contact = await this.contactRepository.findOneBy({ contact_id: id });
 
       if(!contact) {
-        return { statusCode: 404, message: 'Service Not Found'};    
+        return { statusCode: 404, message: 'Contact Not Found'};    
       }
 
       this.contactRepository.merge(contact, updateContactDTO);
 
       await this.contactRepository.save(contact);
 
-      return { statusCode: 200, message: 'Services Updated'};   
+      return { statusCode: 200, message: 'Contact Updated'};   
     } catch (e) {
       return { statusCode: 500, message: e}
     }
@@ -66,12 +66,12 @@ export class ContactService {
       const service = await this.contactRepository.findOneBy({ contact_id: id });
 
       if(!service) {
-        return { statusCode: 404, message: 'Service Not Found'};    
+        return { statusCode: 404, message: 'Contact Not Found'};    
       }
 
       await this.contactRepository.delete(id);
 
-      return { statusCode: 200, message: 'Services Deleted'};    
+      return { statusCode: 200, message: 'Contact Deleted'};    
     } catch (e) {
       return { statusCode: 500, message: e}
     }
