@@ -21,6 +21,7 @@ app.use(express.json());
 app.use("/api/v1", routes.servicesRoute);
 app.use("/api/v1", routes.contactRoute);
 app.use("/api/v1", routes.paymentMethodRoute);
+app.use("/api/v1", routes.productCategoryRoute);
 
 app.listen(3005, () => {
   console.log("Server running at port 3005")
