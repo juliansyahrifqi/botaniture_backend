@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { ContactService } from "../services/contact.service";
 import uploadSingleFile from "../utils/uploadFile";
-import { CreateContactDTO, updateContactDTO } from "../dto/contact.dto";
+import { CreateContactDTO, UpdateContactDTO } from "../dto/contact.dto";
 import { existsSync, unlink } from "fs";
 
 export class ContactController {
@@ -73,7 +73,7 @@ export class ContactController {
           finalImage = oldImage;
         }
 
-        const updateContactDTO: updateContactDTO = req.body;
+        const updateContactDTO: UpdateContactDTO = req.body;
   
         const result = await this.contactService.updateContact(+req.params.id, {
           ...updateContactDTO,

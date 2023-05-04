@@ -1,5 +1,5 @@
 import { myDataSource } from "../app-data-source";
-import { CreateContactDTO, updateContactDTO } from "../dto/contact.dto";
+import { CreateContactDTO, UpdateContactDTO } from "../dto/contact.dto";
 import { Contact } from "../entities/Contact";
 
 export class ContactService {
@@ -43,7 +43,7 @@ export class ContactService {
     }
   }
 
-  async updateContact(id: number, updateContactDTO: updateContactDTO) {
+  async updateContact(id: number, updateContactDTO: UpdateContactDTO) {
     try {
       const contact = await this.contactRepository.findOneBy({ contact_id: id });
 
