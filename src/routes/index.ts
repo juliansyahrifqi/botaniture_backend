@@ -3,6 +3,7 @@ import userRoute from "./user";
 import contactRoute from "./contact";
 import paymentMethodRoute from "./payment-method";
 import productCategoryRoute from "./product-category";
+import productRoute from "./product";
 
 export default {
   servicesRoute,
@@ -10,4 +11,5 @@ export default {
   contactRoute,
   paymentMethodRoute,
   productCategoryRoute,
+  productRoute
 }
