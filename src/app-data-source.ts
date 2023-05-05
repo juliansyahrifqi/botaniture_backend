@@ -1,12 +1,13 @@
+import "dotenv/config";
 import { DataSource } from "typeorm";
 
 const myDataSource = new DataSource({
   type: 'postgres',
-  host: 'localhost',
-  port: 5432,
-  username: "postgres",
-  password: "123456",
-  database: 'Botaniture',
+  host: process.env.DB_HOST,
+  port: +process.env.DB_PORT,
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
   entities: ["src/entities/**/*.ts"],
   migrations: ["src/migrations/**/*.ts"],
   logging: true,
