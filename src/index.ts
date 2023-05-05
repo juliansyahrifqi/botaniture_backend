@@ -25,7 +25,9 @@ app.use("/api/v1", routes.paymentMethodRoute);
 app.use("/api/v1", routes.productCategoryRoute);
 app.use("/api/v1", routes.productRoute);
 
+const PORT = process.env.PORT || 3010;
 
-app.listen(3005, () => {
-  console.log("Server running at port 3005")
+
+app.listen(PORT, () => {
+  console.log(`Server running at port ${PORT}`)
 });
