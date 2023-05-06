@@ -3,6 +3,7 @@ import uploadSingleFile from "../utils/uploadFile";
 import { existsSync, unlink } from "fs";
 import { ProductCategoryService } from "../services/product-category.service";
 import { CreateProductCategoryDTO, UpdateProductCategoryDTO } from "../dto/product-category.dto";
+import slugify from "slugify";
 
 export class ProductCategoryController {
   private productCategoryService: ProductCategoryService;
@@ -34,6 +35,9 @@ export class ProductCategoryController {
 
         const productCategory = await this.productCategoryService.createProductCategory({
           ...createProductCategoryDTO,
+          procat_slug: slugify(createProductCategoryDTO.procat_name, {
+            lower: true,
+          }),
           procat_image: req.file ? req.file.filename : null
         });
   
