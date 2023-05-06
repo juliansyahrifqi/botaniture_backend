@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
-import { LayananService } from "../services/Service";
+import { LayananService } from "../services/service.service";
 import { CreateServiceDTO, UpdateServiceDTO } from "../dto/service.dto";
-import multer from "multer";
 import { existsSync, unlink } from "fs";
 import uploadSingleFile from "../utils/uploadFile";
 
@@ -14,8 +13,8 @@ export class ServiceController {
 
   public async getAllServices(req: Request, res: Response) {
     try {
-      const users = await this.layananSerive.getAllServices();
-      res.send(users);
+      const services = await this.layananSerive.getAllServices();
+      res.send(services);
     } catch(e) {
       res.status(500).send({ statusCode: 500, message: e})
     }
@@ -92,7 +91,7 @@ export class ServiceController {
       const service = await this.layananSerive.getServiceById(+req.params.id);
 
       if(service.statusCode === 404) {
-        return { statusCode: 404, message: 'Service not found'};
+        return res.status(404).send({ statusCode: 404, message: 'Service not found'});
       } 
 
       if (existsSync('uploads/service/' + service.data.service_icon)) {

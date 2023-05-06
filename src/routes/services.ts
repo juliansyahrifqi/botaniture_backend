@@ -1,6 +1,6 @@
 import express from "express";
 import { ServiceController } from "../controllers/ServiceController";
-import { LayananService } from "../services/Service";
+import { LayananService } from "../services/service.service";
 
 const router = express.Router();
 

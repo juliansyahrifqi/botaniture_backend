@@ -20,7 +20,12 @@ export class LayananService {
   }
   async getAllServices() {
     try {
-      const services = await this.serviceRepository.find();
+      const services = await this.serviceRepository.find({
+        order: {
+          service_id: "DESC"
+        },
+        take: 4
+      });
 
       if(services.length === 0) {
         return { statusCode: 404, message: 'Services Not Found'}
