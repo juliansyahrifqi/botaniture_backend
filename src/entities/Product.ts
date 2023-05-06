@@ -24,10 +24,10 @@ export class Product {
   @Column({ nullable: true})
   product_image: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ nullable: true })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ nullable: true })
   updatedAt: Date;
 
   @OneToOne(() => ProductCategory, (productCategory) => productCategory.procat_id)

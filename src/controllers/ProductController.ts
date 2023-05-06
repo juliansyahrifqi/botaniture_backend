@@ -61,6 +61,10 @@ export class ProductController {
       try {
         const product = await this.productService.getProductById(+req.params.id);
 
+        if(product.statusCode === 404) {
+          return res.send(product);
+        }
+
         const oldImage = product.data.product_image;
  
         let finalImage: string;
@@ -101,7 +105,7 @@ export class ProductController {
       const product = await this.productService.getProductById(+req.params.id);
 
       if(product.statusCode === 404) {
-        return { statusCode: 404, message: 'Product not found'};
+        return res.send(product);
       } 
 
       if (existsSync('uploads/contact/' + product.data.product_image)) {

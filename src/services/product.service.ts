@@ -10,6 +10,9 @@ export class ProductService {
       const products = await this.productRepository.find({
         relations: {
           productCategory: true
+        },
+        order: {
+          product_id: "ASC"
         }
       });
 
