@@ -18,6 +18,7 @@ const app = express();
 
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
+app.use('/static', express.static('uploads'))
 
 app.use("/api/v1", routes.servicesRoute);
 app.use("/api/v1", routes.contactRoute);
