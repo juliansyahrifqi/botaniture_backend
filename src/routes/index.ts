@@ -4,6 +4,7 @@ import contactRoute from "./contact";
 import paymentMethodRoute from "./payment-method";
 import productCategoryRoute from "./product-category";
 import productRoute from "./product";
+import promoRoute from "./promo";
 
 export default {
   servicesRoute,
@@ -11,5 +12,6 @@ export default {
   contactRoute,
   paymentMethodRoute,
   productCategoryRoute,
-  productRoute
+  productRoute,
+  promoRoute
 }

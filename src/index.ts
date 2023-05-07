@@ -25,6 +25,7 @@ app.use("/api/v1", routes.contactRoute);
 app.use("/api/v1", routes.paymentMethodRoute);
 app.use("/api/v1", routes.productCategoryRoute);
 app.use("/api/v1", routes.productRoute);
+app.use("/api/v1", routes.promoRoute);
 
 const PORT = process.env.PORT || 3010;
 
