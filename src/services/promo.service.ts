@@ -1,3 +1,4 @@
+import { LessThanOrEqual, MoreThanOrEqual } from "typeorm";
 import { myDataSource } from "../app-data-source";
 import { CreatePromoDTO, UpdatePromoDTO } from "../dto/promo.dto";
 import { Product } from "../entities/Product";
@@ -48,14 +49,18 @@ export class PromoService {
         },
         order: {
           promo_id: "DESC"
-        }
+        },
+        where: {
+          promo_end_date: MoreThanOrEqual(new Date())
+        },
+        take: 1
       })
 
       if(promoProduct.length === 0) {
         return { statusCode: 404, message: 'Promo Not Found'} 
       }
 
-      return { statusCode: 200, message: "Promo found", data: promoProduct }
+      return { statusCode: 200, message: "Promo found", data: promoProduct[0] }
     } catch (e) {
       return { statusCode: 500, message: e}
     }
