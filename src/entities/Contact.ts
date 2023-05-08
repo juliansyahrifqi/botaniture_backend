@@ -9,8 +9,11 @@ export class Contact {
   contact_name: string;
 
   @Column()
-  contact_link: string;
+  contact_account: string;
 
+  @Column()
+  contact_link: string;
+  
   @Column({ nullable: true})
   contact_image: string;
 }
