@@ -22,6 +22,18 @@ export class ProductController {
     }
   }
 
+  public async getProductBySlug(req: Request, res: Response) {
+    try {
+      const products = await this.productService.getProductBySlug(req.params.slug);
+
+      res.send(products);
+    } catch (e) {
+      res.status(500).send({ statusCode: 500, message: e});
+    }
+  }
+
+
+
   public async createProduct(req: Request, res: Response) {
     const upload = uploadSingleFile("product", "product_image");
 

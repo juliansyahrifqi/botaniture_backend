@@ -47,6 +47,27 @@ export class ProductService {
     }
   }
 
+  async getProductBySlug(slug: string) {
+    try {
+      const product = await this.productRepository.findOne({
+        relations: {
+          productCategory: true
+        },
+        where: {
+          product_slug: slug
+        }
+      });
+
+      if(!product) {
+        return { statusCode: 404, message: 'Product Not Found'}
+      }
+
+      return { statusCode: 200, message: 'Product Found', data: product};
+    } catch (e) {
+      return { statusCode: 500, message: e}
+    }
+  }
+
   async createProduct(createProductDTO: CreateProductDTO) {
     try {
       await this.productRepository.save(createProductDTO);
