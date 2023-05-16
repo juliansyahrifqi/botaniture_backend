@@ -20,7 +20,6 @@ export class ProductService {
 
       return { statusCode: 200, message: 'Products Found', data: products};
     } catch (e) {
-      console.log(e);
       return { statusCode: 500, message: e}
     }
   }
@@ -28,9 +27,7 @@ export class ProductService {
   async getProductById(id: number) {
     try {
       const product = await this.productRepository.findOne({
-        relations: {
-          productCategory: true
-        },
+        relations: ['productCategory', 'productGalleries'],
         where: {
           product_id: id
         }
@@ -49,9 +46,7 @@ export class ProductService {
   async getProductBySlug(slug: string) {
     try {
       const product = await this.productRepository.findOne({
-        relations: {
-          productCategory: true
-        },
+        relations: ['productCategory', 'productGalleries'],
         where: {
           product_slug: slug
         }
