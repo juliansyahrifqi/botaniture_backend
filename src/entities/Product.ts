@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { ProductCategory } from "./ProductCategory";
+import { ProductGallery } from "./ProductGallery";
 
 @Entity()
 export class Product {
@@ -39,4 +40,7 @@ export class Product {
   @OneToOne(() => ProductCategory, (productCategory) => productCategory.procat_id)
   @JoinColumn({ name: "product_category_id"})
   productCategory: ProductCategory;
+
+  @OneToMany(() => ProductGallery, (productGallery) => productGallery.product)
+  productGalleries: ProductGallery[];
 }

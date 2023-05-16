@@ -8,9 +8,7 @@ export class ProductService {
   async getAllProduct() {
     try {
       const products = await this.productRepository.find({
-        relations: {
-          productCategory: true
-        },
+        relations: ['productCategory', 'productGalleries'],
         order: {
           product_id: "ASC"
         }
@@ -22,6 +20,7 @@ export class ProductService {
 
       return { statusCode: 200, message: 'Products Found', data: products};
     } catch (e) {
+      console.log(e);
       return { statusCode: 500, message: e}
     }
   }
