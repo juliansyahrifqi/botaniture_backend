@@ -24,6 +24,12 @@ export class Product {
   @Column({ nullable: true})
   product_image: string;
 
+  @Column({ default: 0})
+  product_stock: number;
+
+  @Column({ default: 1, type: "numeric" })
+  product_weight: number;
+
   @CreateDateColumn({ nullable: true })
   createdAt: Date;
 
