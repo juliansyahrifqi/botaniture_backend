@@ -15,6 +15,6 @@ export class ProductCategory {
   @Column({ nullable: true})
   procat_image: string;
 
-  @OneToOne(() => Product, (product) => product.product_id)
-  product: Product;
+  @OneToMany(() => Product, (product) => product.product_id)
+  product: Product[];
 }

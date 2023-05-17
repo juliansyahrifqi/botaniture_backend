@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { ProductCategory } from "./ProductCategory";
 import { ProductGallery } from "./ProductGallery";
 
@@ -37,7 +37,7 @@ export class Product {
   @UpdateDateColumn({ nullable: true })
   updatedAt: Date;
 
-  @OneToOne(() => ProductCategory, (productCategory) => productCategory.procat_id)
+  @ManyToOne(() => ProductCategory, (productCategory) => productCategory.procat_id)
   @JoinColumn({ name: "product_category_id"})
   productCategory: ProductCategory;
 

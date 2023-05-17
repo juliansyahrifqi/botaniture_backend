@@ -1,9 +1,12 @@
+import { create } from "domain";
 import { myDataSource } from "../app-data-source";
 import { CreateProductDTO, UpdateProductDTO } from "../dto/product.dto";
 import { Product } from "../entities/Product";
+import { ProductCategory } from "../entities/ProductCategory";
 
 export class ProductService {
   private readonly productRepository = myDataSource.getRepository(Product);
+  private readonly productCategoryRepository = myDataSource.getRepository(ProductCategory);
 
   async getAllProduct() {
     try {
@@ -64,7 +67,18 @@ export class ProductService {
 
   async createProduct(createProductDTO: CreateProductDTO) {
     try {
-      await this.productRepository.save(createProductDTO);
+      const productCategory = await this.productCategoryRepository.findOneBy({ procat_id: createProductDTO.product_category_id});
+
+      if(!productCategory) {
+        return { statusCode: 404, message: 'Product Category Not Found'};
+      }
+
+      const product = {
+        ...createProductDTO,
+        productCategory: productCategory
+      }
+
+      await this.productRepository.save(product);
 
       return { statusCode: 200, message: 'Product Created'};
     } catch (e) {
