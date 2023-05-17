@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import uploadSingleFile from "../utils/uploadFile";
+import { uploadSingleFile } from "../utils/uploadFile";
 import { existsSync, unlink } from "fs";
 import { ProductCategoryService } from "../services/product-category.service";
 import { CreateProductCategoryDTO, UpdateProductCategoryDTO } from "../dto/product-category.dto";

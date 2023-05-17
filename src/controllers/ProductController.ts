@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import uploadSingleFile from "../utils/uploadFile";
+import { uploadSingleFile } from "../utils/uploadFile";
 import { existsSync, unlink } from "fs";
 import { ProductService } from "../services/product.service";
 import { CreateProductDTO, UpdateProductDTO } from "../dto/product.dto";
@@ -31,9 +31,7 @@ export class ProductController {
       res.status(500).send({ statusCode: 500, message: e});
     }
   }
-
-
-
+  
   public async createProduct(req: Request, res: Response) {
     const upload = uploadSingleFile("product", "product_image");
 

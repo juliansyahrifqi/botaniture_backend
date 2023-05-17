@@ -1,10 +1,12 @@
 import { myDataSource } from "../app-data-source";
 import { CreateProductGalleryDTO, UpdateProductGalleryDTO } from "../dto/product-gallery.dto";
+import { Product } from "../entities/Product";
 import { ProductGallery } from "../entities/ProductGallery";
 
 
 export class ProductGalleryService {
   private readonly productGalleryRepository = myDataSource.getRepository(ProductGallery);
+  private readonly productRepository = myDataSource.getRepository(Product);
 
   async getProductGalleryById(id: number) {
     try {
@@ -22,9 +24,14 @@ export class ProductGalleryService {
 
   async createProductGallery(createProductGalleryDTO: CreateProductGalleryDTO) {
     try {
-      await this.productGalleryRepository.save(createProductGalleryDTO);
+      const product = await this.productRepository.findOneBy({ product_id: createProductGalleryDTO.proga_product_id});
 
-      return { statusCode: 200, message: 'Product Gallery Created'};
+      const productGallery = new ProductGallery();
+      productGallery.proga_image = createProductGalleryDTO.proga_image;
+      productGallery.proga_primary = createProductGalleryDTO.proga_primary;
+      productGallery.product = product;
+
+      await this.productGalleryRepository.save(productGallery);
     } catch (e) {
       return { statusCode: 500, message: e}
     }

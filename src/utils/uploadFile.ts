@@ -34,5 +34,37 @@ const uploadSingleFile = (dirName: string, fieldName: string) => {
   return upload;
 };
 
+const uploadMultipleFiles = (dirName: string, fieldName: string) => {
+  const uploadDirectory = path.join(__dirname, '../../', 'uploads/', dirName);
 
-export default uploadSingleFile;
+  if (!fs.existsSync(uploadDirectory)) {
+    fs.mkdirSync(uploadDirectory);
+  }
+
+  const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, uploadDirectory);
+    },
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now() + Math.round(Math.random() * 1e9);
+      cb(null, uniqueSuffix + path.extname(file.originalname));
+    },
+  });
+
+  const upload = multer({
+    storage: storage,
+    limits: { fileSize: 1024 * 1024 * 2},
+    fileFilter(req, file, cb) {
+      if (!file.originalname.match(/\.(jpg|jpeg|png|gif|svg)$/)) {
+        return cb(null, false);
+      }
+
+      return cb(null, true);
+    }
+  }).array(fieldName);
+
+  return upload;
+};
+
+
+export {uploadSingleFile, uploadMultipleFiles};

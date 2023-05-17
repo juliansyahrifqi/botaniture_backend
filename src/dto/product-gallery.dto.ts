@@ -5,7 +5,5 @@ export class CreateProductGalleryDTO {
 }
 
 export class UpdateProductGalleryDTO {
-  proga_primary: boolean;
   proga_image: string;
-  proga_product_id: number;
 }

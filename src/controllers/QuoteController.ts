@@ -1,7 +1,5 @@
 import { Request, Response } from "express";
-import { ContactService } from "../services/contact.service";
-import uploadSingleFile from "../utils/uploadFile";
-import { CreateContactDTO, UpdateContactDTO } from "../dto/contact.dto";
+import { uploadSingleFile } from "../utils/uploadFile";
 import { existsSync, unlink } from "fs";
 import { QuoteService } from "../services/quote.service";
 import { UpdateQuoteDTO } from "../dto/quote.dto";

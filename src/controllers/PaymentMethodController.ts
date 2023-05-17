@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import uploadSingleFile from "../utils/uploadFile";
+import { uploadSingleFile } from "../utils/uploadFile";
 import { existsSync, unlink } from "fs";
 import { PaymentMethodService } from "../services/payment-method.service";
 import { CreatePaymentMethodDTO, UpdatePaymentMethodDTO } from "../dto/payment-method.dto";

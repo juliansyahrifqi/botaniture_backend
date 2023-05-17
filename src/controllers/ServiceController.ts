@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { LayananService } from "../services/service.service";
 import { CreateServiceDTO, UpdateServiceDTO } from "../dto/service.dto";
 import { existsSync, unlink } from "fs";
-import uploadSingleFile from "../utils/uploadFile";
+import { uploadSingleFile } from "../utils/uploadFile";
 
 export class ServiceController {
   private layananSerive: LayananService;

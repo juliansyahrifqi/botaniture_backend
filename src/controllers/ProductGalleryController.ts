@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import uploadSingleFile from "../utils/uploadFile";
+import { uploadMultipleFiles, uploadSingleFile } from "../utils/uploadFile";
 import { existsSync, unlink } from "fs";
 import { ProductGalleryService } from "../services/product-gallery.service";
 import { CreateProductGalleryDTO, UpdateProductGalleryDTO } from "../dto/product-gallery.dto";
@@ -12,22 +12,33 @@ export class ProductGalleryController {
   }
 
   public async createProductGallery(req: Request, res: Response) {
-    const upload = uploadSingleFile("product_gallery", "proga_image");
+    const upload = uploadMultipleFiles("product_gallery", "proga_image");
 
     upload(req, res, async(err) => {
       if (err) {
         return res.status(400).json({ message: "File upload failed", error: err });
       }
-      
+
       try {
         const createProductGalleryDTO: CreateProductGalleryDTO = req.body;
 
-        const productGallery = await this.productGalleryService.createProductGallery({
-          ...createProductGalleryDTO,
-          proga_image: req.file ? req.file.filename : null
-        });
+        if(req.files.length !== 0) {
+          for(let i = 0; i < +req.files.length; i++) {
+            await this.productGalleryService.createProductGallery({
+              ...createProductGalleryDTO,
+              proga_primary: i === 0 ? true : false, // Always set first image to primary image
+              proga_image: req.files[i].filename
+            });
+          } 
+        } else {
+          await this.productGalleryService.createProductGallery({
+            ...createProductGalleryDTO,
+            proga_primary: true,
+            proga_image: null,
+          });
+        }
   
-        res.send(productGallery);
+        return res.status(200).send({ statusCode: 200, message: 'Product Gallery Created'})
       } catch (e) {
         res.status(500).send({ statusCode: 500, message: e})
       }

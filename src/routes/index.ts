@@ -6,6 +6,7 @@ import productCategoryRoute from "./product-category";
 import productRoute from "./product";
 import promoRoute from "./promo";
 import quoteRoute from "./quote";
+import productGalleryRoute from "./product-gallery"
 
 export default {
   servicesRoute,
@@ -15,5 +16,6 @@ export default {
   productCategoryRoute,
   productRoute,
   promoRoute,
-  quoteRoute
+  quoteRoute,
+  productGalleryRoute
 }
