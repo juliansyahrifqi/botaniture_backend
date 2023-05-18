@@ -37,7 +37,7 @@ export class Product {
   @UpdateDateColumn({ nullable: true })
   updatedAt: Date;
 
-  @ManyToOne(() => ProductCategory, (productCategory) => productCategory.procat_id)
+  @ManyToOne(() => ProductCategory, (productCategory) => productCategory.product)
   @JoinColumn({ name: "product_category_id"})
   productCategory: ProductCategory;
 

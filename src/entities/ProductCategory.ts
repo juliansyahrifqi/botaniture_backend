@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Product } from "./Product";
 
 @Entity()
@@ -15,6 +15,6 @@ export class ProductCategory {
   @Column({ nullable: true})
   procat_image: string;
 
-  @OneToMany(() => Product, (product) => product.product_id)
+  @OneToMany(() => Product, (product) => product.productCategory)
   product: Product[];
 }

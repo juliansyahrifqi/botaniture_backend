@@ -2,13 +2,16 @@ import { myDataSource } from "../app-data-source";
 import { CreateProductCategoryDTO, UpdateProductCategoryDTO } from "../dto/product-category.dto";
 import { ProductCategory } from "../entities/ProductCategory";
 
-
 export class ProductCategoryService {
   private readonly productCategoryRepository = myDataSource.getRepository(ProductCategory);
 
   async getAllProductCategory() {
     try {
-      const productCategory = await this.productCategoryRepository.find();
+      const productCategory = await this.productCategoryRepository.find({
+        relations: {
+          product: true
+        }
+      });
 
       if(productCategory.length === 0) {
         return { statusCode: 404, message: 'Product Category Not Found'}
@@ -16,6 +19,7 @@ export class ProductCategoryService {
 
       return { statusCode: 200, message: 'Product Category Found', data: productCategory};
     } catch (e) {
+      console.log(e);
       return { statusCode: 500, message: e}
     }
   }
