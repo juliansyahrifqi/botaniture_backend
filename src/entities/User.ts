@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, OneToMany } from "typeorm";
-import { UserProfile } from "./UserProfiles";
+import { UserProfile } from "./UserProfile";
 import { UserAddress } from "./UserAddress";
 
 @Entity()
