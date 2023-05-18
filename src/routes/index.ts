@@ -8,6 +8,7 @@ import promoRoute from "./promo";
 import quoteRoute from "./quote";
 import productGalleryRoute from "./product-gallery"
 import provinceRoute from "./provinces";
+import cityRoute from "./city";
 
 export default {
   servicesRoute,
@@ -19,5 +20,6 @@ export default {
   promoRoute,
   quoteRoute,
   productGalleryRoute,
-  provinceRoute
+  provinceRoute,
+  cityRoute
 }
