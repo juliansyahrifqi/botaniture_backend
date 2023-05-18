@@ -26,11 +26,11 @@ export class ProductGalleryService {
     try {
       const product = await this.productRepository.findOneBy({ product_id: createProductGalleryDTO.proga_product_id});
 
-      const productGallery = new ProductGallery();
-      productGallery.proga_image = createProductGalleryDTO.proga_image;
-      productGallery.proga_primary = createProductGalleryDTO.proga_primary;
-      productGallery.product = product;
-
+      const productGallery = {
+        ...createProductGalleryDTO,
+        product: product
+      }
+      
       await this.productGalleryRepository.save(productGallery);
     } catch (e) {
       return { statusCode: 500, message: e}
