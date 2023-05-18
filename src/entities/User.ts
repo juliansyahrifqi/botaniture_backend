@@ -1,16 +1,36 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, OneToMany } from "typeorm";
+import { UserProfile } from "./UserProfiles";
+import { UserAddress } from "./UserAddress";
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  id: number;
+  user_id: number;
 
   @Column()
-  name: string;
+  user_name: string;
+
+  @Column({ unique: true })
+  user_email: string;
+
+  @Column({ unique: true })
+  user_phone_number: string;
 
   @Column()
-  email: string;
+  user_role_id: number;
 
   @Column()
-  password: string;
+  user_password: string;
+
+  @CreateDateColumn({ nullable: true })
+  createdAt: Date;
+
+  @UpdateDateColumn({ nullable: true })
+  updatedAt: Date;
+
+  @OneToOne(() => UserProfile, (userProfile) => userProfile.user)
+  userProfile: UserProfile;
+
+  @OneToMany(() => UserAddress, (userAddress) => userAddress.user)
+  userAddress: UserAddress[];
 }
