@@ -1,10 +1,40 @@
 import { myDataSource } from "../app-data-source";
-import { RegisterAccountDTO, UpdatePasswordDTO, UpdateProfileDTO } from "../dto/user.dto";
+import { LoginUserDTO, RegisterAccountDTO, UpdatePasswordDTO, UpdateProfileDTO } from "../dto/user.dto";
 import { User } from "../entities/User";
 import bcrypt from "bcrypt";
+import Jwt from "jsonwebtoken";
 
 export class UserService {
   private readonly userRepository = myDataSource.getRepository(User);
+
+  async login(loginUserDTO: LoginUserDTO) {
+    try {
+      const user = await this.userRepository.findOneBy({ user_email: loginUserDTO.user_email});
+
+      if(!user) {
+        return { statusCode: 404, message: 'User Not Registered' };
+      }
+
+      const isValid = await bcrypt.compare(loginUserDTO.user_password, user.user_password);
+
+      if(!isValid) {
+        return { statusCode: 400, message: 'Password is wrong' };
+      }
+
+      const token = Jwt.sign({
+        user_id: user.user_id,
+        user_name: user.user_name,
+        user_email: user.user_email,
+        user_role_id: user.user_role_id,
+        user_phone_number: user.user_phone_number,
+        iat: Math.floor(Date.now() / 1000) - 30 
+      }, process.env.SECRET_KEY, { expiresIn: '2d'});
+
+      return { statusCode: 200, message: 'Login Success', token: token}
+    } catch (error) {
+      return { statusCode: 500, message: error };
+    }
+  }
 
   async getUserProfile(id: number) {
     try {

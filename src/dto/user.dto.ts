@@ -19,3 +19,8 @@ export class UpdatePasswordDTO {
   user_password: string;
   new_password: string;
 }
+
+export class LoginUserDTO {
+  user_email: string;
+  user_password: string;
+}

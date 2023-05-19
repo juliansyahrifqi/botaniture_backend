@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { UserService } from "../services/user.service";
-import { RegisterAccountDTO, UpdatePasswordDTO, UpdateProfileDTO } from "../dto/user.dto";
+import { LoginUserDTO, RegisterAccountDTO, UpdatePasswordDTO, UpdateProfileDTO } from "../dto/user.dto";
 import { uploadSingleFile } from "../utils/uploadFile";
 import { existsSync, unlink } from "fs";
 
@@ -9,6 +9,17 @@ export class UserController {
 
   constructor(userService: UserService) {
     this.userService = userService;
+  }
+
+  async login(req: Request, res: Response) {
+    try {
+      const loginUserDTO: LoginUserDTO = req.body;
+      const login = await this.userService.login(loginUserDTO);
+
+      res.send(login);
+    } catch (error) {
+      res.status(500).send({ statusCode: 500, message: error });
+    }
   }
 
   async getUserProfile(req: Request, res: Response) {
