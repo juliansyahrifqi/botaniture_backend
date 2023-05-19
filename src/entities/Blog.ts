@@ -1,6 +1,4 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToOne, JoinColumn } from "typeorm";
-import { UserAddress } from "./UserAddress";
-import { Province } from "./Province";
 import { User } from "./User";
 
 @Entity()

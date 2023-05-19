@@ -13,13 +13,13 @@ export class User {
   @Column({ unique: true })
   user_email: string;
 
-  @Column({ unique: true })
+  @Column({ unique: true, length: 15})
   user_phone_number: string;
 
-  @Column()
+  @Column({ nullable: true })
   user_photo_profile: string;
 
-  @Column()
+  @Column({ default: 2})
   user_role_id: number;
 
   @Column()
