@@ -10,7 +10,7 @@ import productGalleryRoute from "./product-gallery"
 import provinceRoute from "./provinces";
 import cityRoute from "./city";
 
-export default {
+const routes = [
   servicesRoute,
   userRoute,
   contactRoute,
@@ -22,4 +22,6 @@ export default {
   productGalleryRoute,
   provinceRoute,
   cityRoute
-}
+];
+
+export default routes;
