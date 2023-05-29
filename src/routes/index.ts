@@ -9,6 +9,7 @@ import quoteRoute from "./quote";
 import productGalleryRoute from "./product-gallery"
 import provinceRoute from "./provinces";
 import cityRoute from "./city";
+import cartRoute from "./cart";
 
 const routes = [
   servicesRoute,
@@ -21,7 +22,8 @@ const routes = [
   quoteRoute,
   productGalleryRoute,
   provinceRoute,
-  cityRoute
+  cityRoute,
+  cartRoute
 ];
 
 export default routes;

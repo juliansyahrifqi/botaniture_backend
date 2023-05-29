@@ -1,6 +1,7 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { ProductCategory } from "./ProductCategory";
 import { ProductGallery } from "./ProductGallery";
+import { Cart } from "./Cart";
 
 @Entity()
 export class Product {
@@ -43,4 +44,7 @@ export class Product {
 
   @OneToMany(() => ProductGallery, (productGallery) => productGallery.product)
   productGalleries: ProductGallery[];
+
+  @OneToMany(() => Cart, (cart) => cart.product)
+  carts: Cart[];
 }

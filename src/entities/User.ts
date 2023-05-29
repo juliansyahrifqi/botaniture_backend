@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, OneToMany } from "typeorm";
 import { UserAddress } from "./UserAddress";
 import { Blog } from "./Blog";
+import { Cart } from "./Cart";
 
 @Entity()
 export class User {
@@ -42,4 +43,7 @@ export class User {
 
   @OneToMany(() => Blog, (blog) => blog.user)
   blogs: Blog[];
+
+  @OneToMany(() => Cart, (cart) => cart.user)
+  carts: Cart[];
 }
